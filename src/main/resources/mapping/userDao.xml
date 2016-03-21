@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.UserDao">
-	<select id="findAll" resultType="entity.User">
-        select * from sys_users
+
+    <delete id="deleteByBatch">
+        delete from sys_users
+        where id in
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            ${id}
+        </foreach>
+    </delete>
+
+    <select id="countAll" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM sys_users
+    </select>
+
+    <select id="findAll" parameterType="map" resultType="entity.User">
+        select
+        id,username,password,salt,locked
+        from sys_users
+        <where>
+            <if test="user.username!=null">
+                username like CONCAT("%",#{user.username},"%")
+            </if>
+        </where>
+        LIMIT #{pager.startRow}, #{pager.rows}
     </select>
 
 </mapper>
