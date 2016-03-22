@@ -22,12 +22,12 @@ public class UserController {
     @Resource
     private UserDao userDao;
 
-    @RequestMapping("tolist.do")
+    @RequestMapping("tolist")
     public String tolist(){
         return "demo";
     }
 
-    @RequestMapping("list.do")
+    @RequestMapping("list")
     @ResponseBody
     public String test(Pager pager, User user){
         if(pager==null){
@@ -37,25 +37,23 @@ public class UserController {
         Map<String, Object> queryMap = new HashMap<String, Object>();
         queryMap.put("pager", pager);
         queryMap.put("user", user);
-
         List<User> list = userDao.findAll(queryMap);
+
         int total = userDao.countAll();
 
         Table<User> t = new Table<User>();
         t.setTotal(total);
         t.setRows(list);
 
-
         return JSON.toJSONString(t);
     }
 
-    @RequestMapping("deletebybatch.do")
+    @RequestMapping("deletebybatch")
     public String deleteByBatch(String[] array){
         int[] ids=new int[array.length];
         for(int i=0;i<array.length;i++){
             ids[i]=Integer.parseInt(array[i]);
         }
-
         userDao.deleteByBatch(ids);
 
         return "redirect:tolist.do";

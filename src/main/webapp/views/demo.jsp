@@ -5,9 +5,9 @@
 
     <title>Druid</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    <link href="static/plugins/easyui/1.4/themes/bootstrap/easyui.css" rel="stylesheet" type="text/css"/>
-    <link href="static/plugins/easyui/1.4/themes/icon.css" rel="stylesheet" type="text/css"/>
-    <link href="static/plugins/easyui/1.4/themes/demo.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/plugins/easyui/1.4/themes/bootstrap/easyui.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/plugins/easyui/1.4/themes/icon.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/plugins/easyui/1.4/themes/demo.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
@@ -29,13 +29,13 @@
     </table>
 </div>
 
-<script src="static/plugins/jquery/jquery-1.11.3.min.js" type="text/javascript"></script>
-<script src="static/plugins/easyui/1.4/jquery.easyui.min.js" type="text/javascript"></script>
-<script src="static/plugins/easyui/1.4/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
+<script src="../static/plugins/jquery/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="../static/plugins/easyui/1.4/jquery.easyui.min.js" type="text/javascript"></script>
+<script src="../static/plugins/easyui/1.4/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(function () {
         $('#userTable').datagrid({
-            url: '${pageContext.request.contextPath}/list.do',
+            url: '${pageContext.request.contextPath}/list',
             fitColumns: true,
             rownumbers: true,
             scrollbarSize: 0,
@@ -60,7 +60,7 @@
             for (var i = 0; i < sr.length; i++) {
                 ids.push(sr[i].id);
             }
-            location = "${pageContext.request.contextPath}/deletebybatch.do?array=" + ids;
+            location = "${pageContext.request.contextPath}/deletebybatch?array=" + ids;
         }
     }
 
