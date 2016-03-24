@@ -24,6 +24,7 @@
             <th data-options="field:'password',width:100">密码</th>
             <th data-options="field:'salt',width:100">盐</th>
             <th data-options="field:'locked',width:100">是否锁住</th>
+            <th data-options="field:'op',width:100,formatter:op">操作</th>
         </tr>
         </thead>
     </table>
@@ -46,23 +47,20 @@
                 iconCls: 'icon-remove',
                 handler: function () {
                     if (confirm("真的都要删除吗")) {
-                        removeUsers();
+                        var sr = $("#userTable").datagrid("getChecked");
+                        var ids = new Array();
+                        if (sr.length != 0) {
+                            for (var i = 0; i < sr.length; i++) {
+                                ids.push(sr[i].id);
+                            }
+                            location = "${pageContext.request.contextPath}/deletebybatch?array=" + ids;
+                        }
                     }
                 }
             }]
         });
     });
 
-    function removeUsers() {
-        var sr = $("#userTable").datagrid("getChecked");
-        var ids = new Array();
-        if (sr.length != 0) {
-            for (var i = 0; i < sr.length; i++) {
-                ids.push(sr[i].id);
-            }
-            location = "${pageContext.request.contextPath}/deletebybatch?array=" + ids;
-        }
-    }
 
     function search() {
         var name = $("#search").val();
@@ -70,6 +68,20 @@
                 'reload',
                 {username : username}
         );
+    }
+
+    function op(value, row) {
+        var remove =
+                '<a href="javascript:;" ' + 'onclick="removeUser(' + row.id + ')"' + '>' +
+                '删除' +
+                '</a>'
+        return  remove;
+    }
+
+    function removeUser(id) {
+        if(confirm("真的要删除吗")){
+            location = "${pageContext.request.contextPath}/delete?id=" + id;
+        }
     }
 
 

@@ -5,7 +5,7 @@
     <delete id="deleteByBatch">
         delete from sys_users
         where id in
-        <foreach collection="array" open="(" close=")" separator="," item="id">
+        <foreach collection="array"  item="id" open="(" close=")" separator=",">
             ${id}
         </foreach>
     </delete>
@@ -26,5 +26,10 @@
         </where>
         LIMIT #{pager.startRow}, #{pager.rows}
     </select>
+
+    <delete id="deleteById" parameterType="string">
+        delete from sys_users
+        where id=#{id}
+    </delete>
 
 </mapper>

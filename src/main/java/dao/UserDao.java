@@ -16,4 +16,6 @@ public interface UserDao {
 
     List<User> findAll(Map<String, Object> map);
 
+    public void deleteById(String id);
+
 }

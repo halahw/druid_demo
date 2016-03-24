@@ -130,7 +130,26 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.7.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.7.4</version>
+        </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.1</version>
+        </dependency>
+        <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>1.7.19</version>
+        </dependency>
     </dependencies>
 
 
@@ -151,6 +170,9 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>8.1.15.v20140411</version>
                 <configuration>
+                    <!--设置热部署扫描时间，以便加快启动；0即关闭热部署 -->
+                    <scanIntervalSeconds>0</scanIntervalSeconds>
+                    <contextXml>${project.basedir}/src/main/resources/jetty/jetty-context.xml</contextXml>
                     <stopKey>shutdown</stopKey>
                     <stopPort>8989</stopPort>
                     <connectors>
@@ -160,6 +182,8 @@
                     </connectors>
                     <webAppConfig>
                         <contextPath>/</contextPath>
+                        <!--可以实时修改html/css/js等静态文件,将useFileMappedBuffer的值从true改为false即可，先于web.xml-->
+                        <defaultsDescriptor>${project.basedir}/src/main/resources/jetty/webdefault.xml</defaultsDescriptor>
                     </webAppConfig>
                 </configuration>
             </plugin>
