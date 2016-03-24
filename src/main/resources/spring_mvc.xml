@@ -9,6 +9,7 @@
    <!-- <mvc:resources mapping="/static/**" location="/static/" cache-period="31536000" />-->
     <!--  对静态资源文件的访问  -->
 
+
     <!-- 默认的注解映射的支持 -->
     <mvc:annotation-driven/>
 
@@ -22,6 +23,7 @@
         <property name="suffix" value=".jsp" />
     </bean>
     <!-- 默认的注解映射的支持 -->
+
 
     <!--global start-->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">

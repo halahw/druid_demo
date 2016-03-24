@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import tyky.service.UserService;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 
 /**
  * Created by Just on 2016/3/20.
@@ -43,7 +44,7 @@ public class UserController {
         try {
             userService.deleteById(id);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.warn("@Transactional测试。。.deleteById("+id+")");
         }
 
         return "redirect:tolist";
@@ -54,7 +55,7 @@ public class UserController {
         try {
             userService.deleteByBatch(array);
         } catch (Exception e) {
-            e.printStackTrace();
+           log.warn("@Transactional测试。。.deletebybatch("+ Arrays.toString(array)+")");
         }
 
         return "redirect:tolist";
